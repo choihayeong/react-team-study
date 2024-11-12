@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./routes/Home";
-import Subpage from "./routes/Subpage";
+import Qna from "./routes/Qna";
 
 const routes = createBrowserRouter([
   {
@@ -8,14 +8,12 @@ const routes = createBrowserRouter([
     element: <Home />
   },
   {
-    path: "/subpage",
-    element: <Subpage />
+    path: "/qna",
+    element: <Qna />
   },
 ]);
 
 function App() {
-  // const [count, setCount] = useState(0)
-
   return (
     <RouterProvider router={routes} />
   )
