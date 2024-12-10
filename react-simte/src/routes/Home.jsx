@@ -1,20 +1,14 @@
-import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
     let navigate = useNavigate();
 
-    const startTest = () => {
-        navigate(`/qna`);
-    };
-
     return (
         <>
-            <main className="">
-                <h1>React Simte</h1>
-                {/* <Link to={`/subpage`}>Go to subpage &rarr;</Link> */}
-                <Button btntext={"시작"} onClickEvent={startTest} />
-            </main>
+            <h1>Simple MBTI Test</h1>
+
+            <Button text={`시작하기`} onClickEvent={() => navigate('/test-page')} />
         </>
     );
 };

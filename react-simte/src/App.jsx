@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./routes/Home";
-import Qna from "./routes/Qna";
+import TestPage from "./routes/TestPage";
+import TestResult from "./routes/TestResult";
 
 const routes = createBrowserRouter([
   {
@@ -8,9 +9,13 @@ const routes = createBrowserRouter([
     element: <Home />
   },
   {
-    path: "/qna",
-    element: <Qna />
+    path: "/test-page",
+    element: <TestPage />
   },
+  {
+    path: "/test-result",
+    element: <TestResult />
+  }
 ]);
 
 function App() {
