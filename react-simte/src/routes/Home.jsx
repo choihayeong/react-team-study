@@ -6,9 +6,10 @@ const Home = () => {
 
     return (
         <>
-            <h1>Simple MBTI Test</h1>
-
-            <Button text={`시작하기`} onClickEvent={() => navigate('/test-page')} />
+            <main className="main">
+                <h1>Simple MBTI Test</h1>
+                <Button btntext={`시작하기`} onClickEvent={() => navigate(`/test-page`)} />
+            </main>
         </>
     );
 };
