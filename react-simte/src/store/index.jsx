@@ -1,5 +1,6 @@
 import { createStore } from "redux";
 
+// DUMMY DATA
 const qnaList = [
     {
         q: "붕어빵 장사를 시작했는데 손님이 한 명도 없엉",
@@ -159,10 +160,22 @@ const qnaList = [
     },
 ];
 
+let result = [];
+
+const getResult = (type) => {
+    return type;
+};
+
 const reducer = (state=qnaList, action) => {
+    // console.log(state.a);
+
     return state;
 };
 
 const store = createStore(reducer);
+
+export const actionCreators = {
+    getResult,
+};
 
 export default store;

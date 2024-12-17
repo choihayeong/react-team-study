@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import style from "../scss/Button.module.scss";
+
 
 const Button = (props) => {
     const { btntext, link, onClickEvent } = props;
 
     if (link) {
-        return <Link to={link}>{btntext}</Link>
+        return <Link to={link} className={style.btn} >{btntext} </Link>
     } else {
         return (
-            <button type="button" onClick={onClickEvent}>{btntext}</button>
+            <button type="button" className={style.btn} onClick={onClickEvent}>{btntext}</button>
         );
     }
 

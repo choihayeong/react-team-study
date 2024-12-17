@@ -3,37 +3,49 @@ import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import QnaItem from "../components/QnaItem";
+import { actionCreators } from "../store";
 
-const TestPage = ({ tempList }) => {
+const TestPage = ({ qnaList, getResult }) => {
     let navigate = useNavigate();
 
     const [qIdx, setIdx] = useState(0);
 
-    const getQuestionIdx = () => {
+    const getQuestionIdx = (e) => {
         setIdx(qIdx + 1);
 
-        if (qIdx + 1 === tempList.length) {
+        if (qIdx + 1 === qnaList.length) {
             navigate('/test-result')
         } else {
             setIdx(qIdx + 1);
+            console.log(e);
+            console.log(qnaList[qIdx].a);
+            // getResult(qnaList[qIdx].a.type);
         }
     };
 
     return (
         <section id="qna" className="qna">
-            <QnaItem question={tempList[qIdx].q} answers={tempList[qIdx].a} handleQuestion={getQuestionIdx} />
+            <QnaItem question={qnaList[qIdx].q} answers={qnaList[qIdx].a} handleQuestion={getQuestionIdx} />
         </section>
     );
 };
 
 const mapStateToProps = (state, ownProps) => {    
     return {
-        tempList: state,
+        qnaList: state,
     };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    console.log(dispatch);
+
+    return {
+        getResult: (type) => dispatch(actionCreators.getResult(type)),
+    }
 };
 
 TestPage.propTypes = {
     tempList: PropTypes.array,
 };
 
-export default connect(mapStateToProps)(TestPage);
+export default connect(mapStateToProps, mapDispatchToProps)(TestPage);
