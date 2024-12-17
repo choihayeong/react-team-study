@@ -5,21 +5,21 @@ import PropTypes from "prop-types";
 import QnaItem from "../components/QnaItem";
 import { actionCreators } from "../store";
 
-const TestPage = ({ qnaList, getResult }) => {
+const TestPage = ({ qnaList, calcResult }) => {
     let navigate = useNavigate();
 
     const [qIdx, setIdx] = useState(0);
 
-    const getQuestionIdx = (e) => {
-        setIdx(qIdx + 1);
+    const getQuestionIdx = (index) => {
+        const question = qnaList[qIdx];
+        const answer = question.a[index];
 
         if (qIdx + 1 === qnaList.length) {
-            navigate('/test-result')
+            navigate('/test-result');
+            calcResult(answer.part.toString());
         } else {
             setIdx(qIdx + 1);
-            console.log(e);
-            console.log(qnaList[qIdx].a);
-            // getResult(qnaList[qIdx].a.type);
+            calcResult(answer.part.toString());
         }
     };
 
@@ -30,22 +30,23 @@ const TestPage = ({ qnaList, getResult }) => {
     );
 };
 
-const mapStateToProps = (state, ownProps) => {    
+const mapStateToProps = (state) => {    
     return {
-        qnaList: state,
+        qnaList: state.qnaList,
+        result: state.result,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    console.log(dispatch);
-
     return {
-        getResult: (type) => dispatch(actionCreators.getResult(type)),
+        calcResult: (type) => dispatch(actionCreators.getResult(type)),
     }
 };
 
 TestPage.propTypes = {
-    tempList: PropTypes.array,
+    qnaList: PropTypes.array,
+    result: PropTypes.array,
+    calcResult: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TestPage);

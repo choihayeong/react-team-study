@@ -7,7 +7,7 @@ const Button = (props) => {
     const { btntext, link, onClickEvent } = props;
 
     if (link) {
-        return <Link to={link} className={style.btn} >{btntext} </Link>
+        return <Link to={link} className={style.btn} onClick={onClickEvent}>{btntext} </Link>
     } else {
         return (
             <button type="button" className={style.btn} onClick={onClickEvent}>{btntext}</button>

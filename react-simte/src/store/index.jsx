@@ -7,11 +7,11 @@ const qnaList = [
         a: [
             {
                 answer: "a) 사람들에게 붕어빵을 적극적으로 홍보함",
-                type: ["E"]
+                part: ["E"]
             },
             {
                 answer: "b) 차분히 기다리면서 붕어빵을 준비함",
-                type: ["I"]
+                part: ["I"]
             }
         ]
     },
@@ -20,11 +20,11 @@ const qnaList = [
         a: [
             {
                 answer: "a) 나의 첫 번째 손님인 걸 알려주고 앞으로 자주 와달라고 함",
-                type: ["E"]
+                part: ["J"]
             },
             {
                 answer: "b) 그냥 웃으며 감사합니다 함",
-                type: ["I"]
+                part: ["P"]
             },
         ]
     },
@@ -33,11 +33,11 @@ const qnaList = [
         a: [
             {
                 answer: "손님에 따라 그때그때 다르게",
-                type: ["P", "N"]
+                part: ["P", "N"]
             },
             {
                 answer: "헷갈리지 않게 같은 양",
-                type: ["J", "S"]
+                part: ["J", "S"]
             },
         ]
     },
@@ -46,11 +46,11 @@ const qnaList = [
         a: [
             {
                 answer: "아 뭔지 알아여 붕어빵은 추억의 맛이죠",
-                type: ["F"]
+                part: ["F"]
             },
             {
                 answer: "붕어빵은 보통 같은 재료가 들어가고 맛이 늘 변함이 없으니까여",
-                type: ["T"]
+                part: ["T"]
             },
         ]
     },
@@ -59,11 +59,11 @@ const qnaList = [
         a: [
             {
                 answer: "좋은 재료가 들어간 걸 말함",
-                type: ["T"]
+                part: ["T"]
             },
             {
                 answer: "나의 마음과 정성이 담겨 있다고 말함",
-                type: ["F"]
+                part: ["F"]
             },
         ]
     },
@@ -72,11 +72,11 @@ const qnaList = [
         a: [
             {
                 answer: "힘들게 굽고 있는데 저러니까 화가 나서 표정이 굳는다",
-                type: ["F", "I"]
+                part: ["F", "I"]
             },
             {
                 answer: "재료비와 품질을 설명하며 가격이 합리적임을 설명함",
-                type: ["T", "E"]
+                part: ["T", "E"]
             },
         ]
     },
@@ -85,11 +85,11 @@ const qnaList = [
         a: [
             {
                 answer: "기존에 있는 걸 조금 변형해 볼까?",
-                type: ["S"]
+                part: ["S"]
             },
             {
                 answer: "완전히 새로운 맛을 생각해 보자",
-                type: ["N"]
+                part: ["N"]
             },
         ]
     },
@@ -98,11 +98,11 @@ const qnaList = [
         a: [
             {
                 answer: "ㅈㅅ 바로 교환해드림 하고 좋게 교환해줌",
-                type: ["S"]
+                part: ["S"]
             },
             {
                 answer: "어떤 부분이 구체적으로 맘에 안드셨음?",
-                type: ["N"]
+                part: ["N"]
             },
         ]
     },
@@ -111,11 +111,11 @@ const qnaList = [
         a: [
             {
                 answer: "맛있으니 한번 드셔보세요! 하고 자신 있게 권함",
-                type: ["E"]
+                part: ["E"]
             },
             {
                 answer: "손님이 결정을 내릴 때까지 기다림",
-                type: ["I"]
+                part: ["I"]
             },
         ]
     },
@@ -124,11 +124,11 @@ const qnaList = [
         a: [
             {
                 answer: "정확한 비율을 맞춰 일정한 양으로",
-                type: ["J"]
+                part: ["J"]
             },
             {
                 answer: "감으로 양을 맞춰가며 만듦",
-                type: ["P"]
+                part: ["P"]
             },
         ]
     },
@@ -137,11 +137,11 @@ const qnaList = [
         a: [
             {
                 answer: "손님에 따라 다르니 무계획. 쉬는 시간도 정하진 않음",
-                type: ["P"]
+                part: ["P"]
             },
             {
                 answer: "내일은 100개 팔고 휴식은 이때쯤 가져야지",
-                type: ["J"]
+                part: ["J"]
             },
         ]
     },
@@ -150,11 +150,11 @@ const qnaList = [
         a: [
             {
                 answer: "아이고 힘들다 쉬다가 정리하셈",
-                type: ["P"]
+                part: ["P"]
             },
             {
                 answer: "남은 재료 정리하고 장부 확인하고 쉬어야지",
-                type: ["J"]
+                part: ["J"]
             },
         ]
     },
@@ -162,20 +162,47 @@ const qnaList = [
 
 let result = [];
 
-const getResult = (type) => {
-    return type;
+const getResult = part => {
+    return {
+        type: "GET",
+        part,
+    };
 };
 
-const reducer = (state=qnaList, action) => {
-    // console.log(state.a);
+const resetResult = () => {
+    return {
+        type: "RESET",
+    };
+}
 
-    return state;
+const reducer = (state={qnaList, result}, action) => {
+    switch(action.type) {
+        case "GET":
+            return {
+                qnaList,
+                result: [...state.result, action.part]
+            };
+        // wip : test-page 내 뒤로가기 버튼 누를 때!
+        case "BACK":
+            return {
+                qnaList,
+                result
+            };
+        case "RESET":
+            return {
+                qnaList,
+                result: []
+            };
+        default:
+            return state;
+    }
 };
 
 const store = createStore(reducer);
 
 export const actionCreators = {
     getResult,
+    resetResult
 };
 
 export default store;
