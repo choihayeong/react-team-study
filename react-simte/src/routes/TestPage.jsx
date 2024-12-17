@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import QnaItem from "../components/QnaItem";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import QnaItem from "../components/QnaItem";
 
 const TestPage = ({ tempList }) => {
     let navigate = useNavigate();

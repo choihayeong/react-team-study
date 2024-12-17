@@ -1,16 +1,23 @@
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const Button = (props) => {
-    const { btntext, onClickEvent } = props;
+    const { btntext, link, onClickEvent } = props;
 
-    return (
-        <button type="button" onClick={onClickEvent}>{btntext}</button>
-    );
+    if (link) {
+        return <Link to={link}>{btntext}</Link>
+    } else {
+        return (
+            <button type="button" onClick={onClickEvent}>{btntext}</button>
+        );
+    }
+
 };
 
 Button.propTypes = {
     btntext: PropTypes.string.isRequired,
-    onClickEvent: PropTypes.func,
+    link: PropTypes.string,
+    onClickEvent: PropTypes.func
 };
 
 export default Button;
